@@ -18,10 +18,15 @@ const routes: Routes = [
       { path: ':tab/:id', component: EmailDetailsComponent, resolve: { email: EmailResolver } },
     ]
   },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes, {
+    useHash: true, // Usa hash en URLs (#/ruta) - opcional
+    scrollPositionRestoration: 'enabled', // Restaura el scroll al navegar
+    anchorScrolling: 'enabled' // Habilita el scroll en anclas (#id)
+  })],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }

@@ -37,6 +37,8 @@ import { LabelSelectorComponent } from './cmps/label-selector/label-selector.com
 import { LabelTagComponent } from './cmps/label-tag/label-tag.component';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 import { DateOrAgoPipe } from './pipes/date-or-ago.pipe';
+import { HeaderComponent } from './components/header/header.component';
+import { AppFooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { DateOrAgoPipe } from './pipes/date-or-ago.pipe';
     HomeComponent,
     AppHeaderComponent,
     EmailAppComponent,
+    AppFooterComponent,
     
     EmailDetailsComponent,
     EmailPreviewComponent,
@@ -61,6 +64,7 @@ import { DateOrAgoPipe } from './pipes/date-or-ago.pipe';
     LabelTagComponent,
     DateFormatPipe,
     DateOrAgoPipe,
+    HeaderComponent,
    
   ],
   imports: [

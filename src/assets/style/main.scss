@@ -9,3 +9,10 @@
 @import "./basic/layout";
 @import "./basic/helpers";
 
+html, body {
+    overflow-x: hidden;  /* Evita scroll horizontal */
+    overflow-y: auto;    /* Asegura el scroll vertical */
+    height: auto;        /* Permite contenido largo */
+    min-height: 100vh;   /* Evita que la página quede bloqueada */
+  }
+  
