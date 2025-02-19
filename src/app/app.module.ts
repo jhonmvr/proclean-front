@@ -11,7 +11,6 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 
 import { reducers, metaReducers } from './store/store';
-import { AppEffects } from './store/app.effects';
 
 import { AppComponent } from './app-root/index';
 import { HomeComponent } from './pages/home/home.component';
@@ -37,8 +36,10 @@ import { LabelSelectorComponent } from './cmps/label-selector/label-selector.com
 import { LabelTagComponent } from './cmps/label-tag/label-tag.component';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 import { DateOrAgoPipe } from './pipes/date-or-ago.pipe';
-import { HeaderComponent } from './components/header/header.component';
-import { AppFooterComponent } from './components/footer/footer.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { AppFooterComponent } from './components/footer/footer.component';
     HomeComponent,
     AppHeaderComponent,
     EmailAppComponent,
-    AppFooterComponent,
+    FooterComponent,
+    
     
     EmailDetailsComponent,
     EmailPreviewComponent,
@@ -64,11 +66,13 @@ import { AppFooterComponent } from './components/footer/footer.component';
     LabelTagComponent,
     DateFormatPipe,
     DateOrAgoPipe,
-    HeaderComponent,
+    NavbarComponent,
    
   ],
   imports: [
     BrowserModule,
+    RouterModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
@@ -83,8 +87,7 @@ import { AppFooterComponent } from './components/footer/footer.component';
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
-    }),
-    EffectsModule.forRoot([AppEffects]),
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],

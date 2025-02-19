@@ -1,0 +1,102 @@
+.navbar-shadow {
+  box-shadow: 0 9px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 28px;
+}
+
+.navbar-nav{
+  display: flex; /* Activa Flexbox */
+  justify-content: center; /* Centra horizontalmente */
+  width: 100%; /* Asegúrate de que ocupe todo el ancho */
+}
+
+.navbar-nav .nav-item {
+  margin-right: 20px; /* Ajusta el valor según el espacio que desees */
+}
+
+.navbar-nav .nav-item:last-child {
+  margin-right: 0; /* Evita margen extra en el último elemento */
+}
+
+.dropdown-item{
+  padding: 10px;
+}
+
+/* From Uiverse.io by roajuan93 */ 
+.card {
+  width: fit-content;
+  height: fit-content;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center; /* Centra verticalmente los iconos */
+  justify-content: center; /* Centra horizontalmente los iconos */
+  padding: 25px 25px;
+  gap: 20px;
+  box-shadow: 0 2px 3px rgba(63, 63, 63, 0.5);
+  flex-direction: row; /* Asegura que los iconos estén en fila */
+  border-radius: 15px;
+}
+
+/* for all social containers*/
+.socialContainer {
+  width: 52px;
+  height: 52px;
+  border-radius: 5px;
+  background-color: rgb(44, 44, 44);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition-duration: 0.3s;
+}
+/* instagram*/
+.containerOne:hover {
+  background-color: #d62976;
+  transition-duration: 0.3s;
+}
+/* Tiktok*/
+.containerTwo:hover {
+  background-color: #25f4ee;
+  transition-duration: 0.3s;
+}
+/* Facebook*/
+.containerThree:hover {
+  background-color: #1877f2;
+  transition-duration: 0.3s;
+}
+/* Whatsapp*/
+.containerFour:hover {
+  background-color: green;
+  transition-duration: 0.3s;
+}
+
+.socialContainer:active {
+  transform: scale(0.9);
+  transition-duration: 0.3s;
+}
+
+.socialSvg {
+  width: 19px;
+}
+.largeIcon {
+  width: 27px; /* Ancho específico solo para el icono de TikTok */
+}
+.socialSvg path {
+  fill: rgb(255, 255, 255);
+}
+
+.socialContainer:hover .socialSvg {
+  animation: slide-in-top 0.3s both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+

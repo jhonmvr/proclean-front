@@ -1,9 +1,248 @@
-.hero {
-  
-  padding: 100px 0;
-  color: white;
-  text-align: center;
+.carousel-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  height: 100%; 
+  padding-top: 35px;         
 }
-.features {
-  padding: 50px 0;
+
+.carousel {
+  width: 98%; 
+  height: 100%;
+}
+
+.carousel img {
+  object-fit: cover;  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border-radius: 10px; 
+  border-color: black;
+}
+
+
+/*Quienes somos*/
+#quienes-somos {
+  padding: 40px 20px;
+  display: flex; /* Usa flexbox para alinear elementos horizontalmente */
+  align-items: center; /* Centra verticalmente los elementos */
+  justify-content: space-between; /* Espacia los elementos */
+}
+
+.container {
+  display: flex;
+  max-width: 1200px; /* Ancho máximo de la sección */
+  margin: 0 auto; /* Centra el contenedor */
+}
+
+.text-section {
+  flex: 1; /* Toma el 1/2 del espacio disponible */
+  padding-right: 20px; /* Espacio entre texto e imagen */
+}
+
+.image-section {
+  flex: 1; /* Toma el 1/2 del espacio disponible */
+}
+
+.image-section img {
+  max-width: 100%; /* Asegura que la imagen no exceda el contenedor */
+  height: auto; /* Mantiene la relación de aspecto */
+  border-radius: 48px; /* Bordes redondeados */
+}
+
+/*NUestros servicios*/
+.sectimg2div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px; /* Margen superior para separación */
+}
+
+.sectimg2div h2 {
+  margin-bottom: 20px; /* Separación entre el título y las imágenes */
+  text-align: center; /* Centrar el texto del título */
+  font-size: 24px;
+  font-family: Arial, sans-serif;
+}
+
+.section2 {
+  display: flex;
+  width: 600px;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Añadir espacio entre las imágenes */
+  overflow: hidden; /* Evitar que el contenedor crezca cuando las imágenes se expanden */
+}
+
+.sectimg2 {
+  width: 0;
+  flex-grow: 1;
+  object-fit: cover;
+  opacity: .8;
+  transition: width .5s ease, opacity .5s ease;
+  border-radius: 20px;
+}
+
+.sectimg2:hover {
+  cursor: crosshair;
+  width: 300px;
+  opacity: 1;
+  filter: contrast(120%);
+}
+
+/* Ajuste para móviles */
+@media (max-width: 768px) {
+  .section2 {
+      flex-wrap: wrap; /* Las imágenes se colocarán en filas si el espacio es limitado */
+      height: auto; /* Ajustar la altura de la sección en pantallas más pequeñas */
+  }
+
+  .sectimg2 {
+      width: 100px; /* Tamaño inicial más pequeño en pantallas pequeñas */
+  }
+
+  .sectimg2:hover {
+      width: 200px; /* Tamaño de la imagen al hacer hover en móviles */
+  }
+}
+
+
+/* TARJETAS DE SERVICIOS */
+.tarjeta-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres tarjetas por fila */
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto; /* Centrar horizontalmente */
+  justify-content: center; /* Alinear contenido al centro */
+  padding-left: 7%;
+}
+
+/* Centrar la última tarjeta en la fila */
+.book:nth-child(7) {
+  grid-column: 2 / 3; /* Centra la última tarjeta */
+}
+
+/* Diseño de la tarjeta */
+.book {
+  position: relative;
+  border-radius: 10px;
+  width: 360px;
+  height: 350px;
+  background-color: whitesmoke;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2); 
+  transform-style: preserve-3d;
+  perspective: 2000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  overflow: hidden;
+}
+
+.cover {
+  top: 0;
+  position: absolute;
+  background-color: rgba(43,108,154,255);
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+  transform-origin: left;
+  box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book:hover .cover {
+  transform: rotateY(-80deg); /* Efecto rotación más fluido */
+}
+
+p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+  .tarjeta-container {
+    grid-template-columns: repeat(2, 1fr); /* Dos tarjetas por fila en pantallas pequeñas */
+  }
+
+  .book:nth-child(7) {
+    grid-column: 1 / -1; /* La última tarjeta centrada en toda la fila */
+    justify-self: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .tarjeta-container {
+    grid-template-columns: 1fr; /* Una tarjeta por fila en pantallas muy pequeñas */
+  }
+}
+
+
+/* -----------------FOOTER------------------------ */
+.footer {
+  background-color: #282c34; /* Fondo oscuro */
+  color: white; /* Texto blanco */
+  padding: 40px 20px; /* Espaciado alrededor */
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between; /* Espacio entre secciones */
+  flex-wrap: wrap; /* Permitir que se ajusten las secciones en pantallas más pequeñas */
+}
+
+.footer-section {
+  flex: 1; /* Cada sección ocupará el mismo espacio */
+  margin: 10px; /* Margen entre secciones */
+}
+
+.footer-section h3 {
+  margin-bottom: 10px; /* Espacio entre el título y el texto */
+  color: #f0db4f; /* Color del título */
+}
+
+.footer-section p {
+  margin: 5px 0; /* Espacio entre párrafos */
+}
+
+.footer-section ul {
+  list-style-type: none; /* Quitar viñetas */
+  padding: 0; /* Quitar padding */
+}
+
+.footer-section ul li {
+  margin: 8px 0; /* Espacio entre enlaces */
+}
+
+.footer-section a {
+  color: #f0db4f; /* Color de los enlaces */
+  text-decoration: none; /* Sin subrayado */
+}
+
+.footer-section a:hover {
+  text-decoration: underline; /* Subrayado en hover */
+}
+
+.social-media {
+  margin-top: 15px; /* Espacio arriba de los iconos */
+}
+
+.social-media a {
+  margin-right: 10px; /* Espacio entre iconos */
+}
+
+.footer-bottom {
+  text-align: center; /* Centrar texto */
+  margin-top: 20px; /* Margen arriba */
+  font-size: 14px; /* Tamaño de fuente más pequeño */
+}
+
+.footer-bottom p {
+  margin: 0; /* Sin margen */
 }
