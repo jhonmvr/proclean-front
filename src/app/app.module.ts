@@ -40,6 +40,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { CommonModule } from '@angular/common';
     AppHeaderComponent,
     EmailAppComponent,
     FooterComponent,
+    LoginComponent,
     
     
     EmailDetailsComponent,
