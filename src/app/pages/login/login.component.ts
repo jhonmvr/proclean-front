@@ -26,7 +26,8 @@ export class LoginComponent {
       next: (response) => {
         this.authService.saveToken(response.token);
         console.log('Login exitoso, token:', response.token);
-        //this.router.navigate(["/inbox"])
+        this.router.navigate(['/email/inbox']);
+
       },
       error: (error) => {
         this.errorMessage = 'Usuario o contrasena incorrectos';

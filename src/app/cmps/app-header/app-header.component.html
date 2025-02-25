@@ -1,12 +1,15 @@
 <section class="app-header flex space-between align-center">
-    <div class="sub1 full-height flex align-center">
-        <div class="menu-wrapper flex ">
-            <header-svg [icon]="'menu'" (click)="menuToggle.emit()"></header-svg>
+    
+        <div class="sub1 full-height flex align-center">
+            <div class="menu-wrapper flex">
+                <header-svg [icon]="'menu'" (click)="menuToggle.emit()"></header-svg>
+            </div>
+    
+            <a routerLink="/email">
+                <img class="logo" src="assets/imagenes/proclena1.png" alt="Logo ProClean">
+            </a>
         </div>
-
-        <img routerLink="/email" class=""
-            src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r5.png" alt="">
-    </div>
+    
 
     <div class="sub2 grow">
         <search-input (search)="setFilter($event)"></search-input>

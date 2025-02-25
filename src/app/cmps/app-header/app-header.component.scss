@@ -58,4 +58,14 @@
     margin-inline: 4px;
   }
 
+  .logo {
+    height: 200px;  /* Aumenta la altura del logo */
+    width: auto;  /* Mantiene la proporción */
+    max-width: 800px; /* Limita el tamaño máximo */
+    object-fit: contain; /* Evita que se deforme */
+    margin-left: 5px; /* Espacio entre el menú y el logo */
+  }
+  
+   
+
 }
