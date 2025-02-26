@@ -28,6 +28,8 @@ export class EmailListComponent {
   tab: string = ''
   label: string = ''
   subscription!: Subscription
+  emailService: any;
+  currentPage: number | undefined;
 
 
   constructor(private store: Store<State>,
@@ -44,11 +46,13 @@ export class EmailListComponent {
   }
 
   ngOnInit() {
+    this.loadEmails(0);
     this.subscription = this.route.params.subscribe(params => {
       let stateFolder
       this.folder$.pipe(take(1)).subscribe(folder => stateFolder = folder)
       this.tab = params['tab'] || ''
       this.label = params['labelName'] || ''
+      
 
       if (stateFolder === (params['tab'] || params['labelName']))
         this.filterBy$.pipe(take(1)).subscribe(filterBy => {
@@ -66,6 +70,20 @@ export class EmailListComponent {
       }
     })
   }
+  loadEmails(page: number) {
+    this.emailService.getEmails(page, 20).subscribe(
+      (data: { content: Email[], totalPages: number }) => {
+        console.log('Correos recibidos:', data);
+        this.emails$ = new Observable(observer => observer.next(data.content)); // Convertir en observable
+        this.totalPages$ = new Observable(observer => observer.next(data.totalPages)); // Convertir en observable
+        this.currentPage = page;
+      },
+      (error: unknown) => {
+        console.error('Error al cargar emails:', error);
+      }
+    );
+  }
+  
 
   toggleCheckbox(payload: selectedEmail): void {
     if (payload.checked) {
