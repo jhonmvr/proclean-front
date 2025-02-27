@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, from, filter } from 'rxjs';
@@ -12,6 +12,7 @@ import { UtilService } from './util.service';
 import { storageService } from './async-storage.service'
 import { FilterBy } from '../models/filterBy';
 import { Label } from '../models/label';
+import { environment } from 'src/environments/environment';
 
 export const EMAIL_KEY = 'email'
 export const LABEL_KEY = 'label'
@@ -21,6 +22,7 @@ export const LABEL_KEY = 'label'
 })
 export class EmailService {
 
+    private apiUrl = `${environment.apiUrl}/email`;
 
     loggedinUser = {
         email: 'user@gmail.com',
@@ -134,5 +136,63 @@ export class EmailService {
         return from(storageService.remove(LABEL_KEY, labelId))
     }
 
+
+
+     /**
+   * Obtiene correos paginados por usuario y carpeta
+   * @param userId ID del usuario
+   * @param folder Nombre de la carpeta (INBOX, SENT, etc.)
+   * @param page Número de página (por defecto 0)
+   * @param size Cantidad de correos por página (por defecto 10)
+   * @returns Observable con la lista de correos paginada
+   */
+  getEmails(userId: number, folder: string, page: number = 0, size: number = 10): Observable<any> {
+    console.log(`Obteniendo correos para usuario ${userId}, carpeta ${folder}, página ${page}, tamaño ${size}`);
+
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+
+    return this.http.get<any>(`${this.apiUrl}/${userId}/${folder}`, { params });
+  }
+
+  /**
+   * Obtiene un correo específico por su ID
+   * @param emailId ID del correo
+   * @returns Observable con la información del correo
+   */
+  getEmailById(emailId: number): Observable<any> {
+    console.log(`Obteniendo correo con ID ${emailId}`);
+    return this.http.get<any>(`${this.apiUrl}/${emailId}`);
+  }
+
+  /**
+   * Elimina un correo por su ID
+   * @param emailId ID del correo a eliminar
+   * @returns Observable con la respuesta del servidor
+   */
+  deleteEmail(emailId: number): Observable<any> {
+    console.log(`Eliminando correo con ID ${emailId}`);
+    return this.http.delete<any>(`${this.apiUrl}/${emailId}`);
+  }
+
+  getUserFoldersByEmail(email: string): Observable<string[]> {
+    console.log(`Obteniendo carpetas de correo para ${email}`);
+    return this.http.get<string[]>(`${this.apiUrl}/folders`, { params: { email } });
+  }
+  
+  getEmailsByUserEmailAndFolder(email: string, folder: string, page: number = 0, size: number = 10): Observable<any> {
+    console.log(`Obteniendo correos para ${email} en la carpeta ${folder}, página ${page}, tamaño ${size}`);
+    
+    const params = new HttpParams()
+      .set('email', email)
+      .set('folder', folder)
+      .set('page', page.toString())
+      .set('size', size.toString());
+  
+    return this.http.get<any>(`${this.apiUrl}/by-folder`, { params });
+  }
+  
+  
 }
 
