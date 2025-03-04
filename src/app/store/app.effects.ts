@@ -18,8 +18,9 @@ export class AppEffects {
     return this.actions$.pipe(
       ofType(LOAD_EMAILS),
       tap(() => console.log('Effects: load emails ==> service')),
-      switchMap((action) =>
-        this.emailService.query(action.filterBy).pipe(
+      switchMap((action) => {
+        console.log("action", action)
+        return this.emailService.query(action.filterBy).pipe(
           tap(() => console.log('Effects: Got emails from service, send it to ===> Reducer.')),
           map(({ entities: emails, totalPages }) => ({
             type: LOADED_EMAILS,
@@ -35,6 +36,8 @@ export class AppEffects {
             })
           })
         )
+      }
+        
       )
     );
   });

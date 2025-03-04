@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, from, filter } from 'rxjs';
+import { Observable, from, filter, map } from 'rxjs';
 import { Email } from '../models/email';
 import { LoadingEmails } from '../store/actions/email.actions';
 import { EmailState } from '../store/reducers/email.reducer';
@@ -47,14 +47,49 @@ export class EmailService {
 
     query(filterBy: FilterBy = {}): Observable<{ entities: Email[], totalPages: number }> {
         this.store.dispatch(new LoadingEmails());
-        // console.log('EmailService: Return Emails ===> effect');
-        return from(storageService.query(EMAIL_KEY, filterBy) as Promise<{ entities: Email[], totalPages: number }>)
-        // return new Observable((observer) => observer.next(emails));
-    }
+        console.log(`EmailService: Cargando emails con filtro:`, filterBy);
+    
+        // Construcción de parámetros de consulta
+        let params = new HttpParams();
+        params = params.set('email', 'desa.jhon.romero@gmail.com');
+        params = params.set('folder', 'INBOX');
+        if (filterBy.page !== undefined) params = params.set('page', filterBy.page.toString());
+        if (filterBy.pageSize !== undefined) params = params.set('size', filterBy.pageSize.toString());
+    
+        return this.http.get<{ content: any[], totalPages: number }>(this.apiUrl+'/by-folder', { params }).pipe(
+            map((response) => ({
+              entities: response.content.map(email => ({
+                _id: email.id?.toString(), // Convertir id a string
+                subject: email.subject,
+                body: email.content || '', // Asegurar que `body` no sea undefined
+                from: email.fromAddress, // Mapea correctamente `from`
+                to: email.usuario.email, // Extraer el destinatario desde `usuario`
+                isRead: false, // Si el backend no lo proporciona, asumimos `false`
+                savedAt: new Date(email.receivedDate).getTime(), // Convertir fecha a timestamp
+                labels: email.folder ? [email.folder] : [], // Usar `folder` como labels
+                tabs: [] // No hay `tabs` en el backend, inicializamos vacío
+              })),
+              totalPages: response.totalPages
+            }))
+          );
+      }
 
     getById(emailId: string): Observable<Email> {
+        console.log('EmailService: Obteniendo email por ID:', emailId);
         // console.log('EmailService: Return Email ===> effect');
-        return from(storageService.get(EMAIL_KEY, emailId) as Promise<Email>)
+        return this.http.get<any>(`${this.apiUrl}/${emailId}`).pipe(
+            map(email => ({
+              _id: email.id?.toString(), // Convertir id a string
+              subject: email.subject,
+              body: email.content || '', // Asegurar que `body` no sea undefined
+              from: email.fromAddress, // Mapea correctamente `from`
+              to: email.usuario?.email || '', // Extraer el destinatario desde `usuario`
+              isRead: false, // Si el backend no lo proporciona, asumimos `false`
+              savedAt: new Date(email.receivedDate).getTime(), // Convertir fecha a timestamp
+              labels: email.folder ? [email.folder] : [], // Usar `folder` como labels
+              tabs: [] // No hay `tabs` en el backend, inicializamos vacío
+            }))
+          );
         // return from(axios.get(URL + emailId) as Promise<Email>)
     }
 

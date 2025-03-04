@@ -13,13 +13,7 @@ export class FolderListComponent {
   @Input() labels!: Label[] | null
   @Input() isFull!: boolean
   folders = [
-    { name: 'inbox' },
-    { name: 'starred' },
-    { name: 'important' },
-    { name: 'sent' },
-    { name: 'drafts' },
-    { name: 'spam' },
-    { name: 'trash' },
+    { name: 'INBOX' }
   ]
   isLabelEdit = false
   labelToEdit: Label | null = null

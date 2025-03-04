@@ -13,12 +13,12 @@
             <div *ngFor="let folder of folders" routerLink="/email/{{folder.name}}" routerLinkActive="active"
                 #rla="routerLinkActive" [title]="folder.name | capitalize">
                 <img style="width:20px; height:20px"
-                    src="assets/icons/{{rla.isActive? 'in'+folder.name:folder.name}}.png">
+                    src="assets/icons/{{rla.isActive? folder.name:folder.name}}.png">
                 <span class="f-text ifFull">{{folder.name|capitalize}}</span>
             </div>
             <div></div>
 
-            <div class="label-header flex space-between align-center">
+            <!-- <div class="label-header flex space-between align-center">
                 <h4 class="ifFull">Labels </h4>
                 <img class="grey-hover" style="width:20px; height:20px" (click)="isLabelEdit=true"
                     src="assets/icons/plus.png" title="Create new label">
@@ -37,7 +37,7 @@
                         (click)="$event.stopPropagation(); removeLabel.emit(label._id)">
                 </span>
 
-            </div>
+            </div> -->
         </section>
 
         <label-edit *ngIf="isLabelEdit" [label]="labelToEdit" (close)="closeLabelEdit()"

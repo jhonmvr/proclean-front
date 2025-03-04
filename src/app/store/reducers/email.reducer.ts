@@ -21,7 +21,7 @@ const initialState: EmailState = {
   error: '',
   filterBy: {
     txt: '',
-    tab: 'inbox',
+    tab: 'INBOX',
     page: 0,
     pageSize: 24
   },
